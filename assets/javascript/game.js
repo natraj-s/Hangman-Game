@@ -1,21 +1,37 @@
-// window.onload = function() {
-//     var element = document.getElementById("theGame");
-//     element.classList.add("hidden");
-// }
 
-// var showGame = function() {
-//     var element = document.getElementById("theGame");
-//     element.classList.remove("hidden");
-//     element.classList.add("show");
-// }
+var showGame = function () {
+    var element = document.getElementById("theGame");
+    element.classList.remove("hidden");
+    element.classList.add("show");
+    document.getElementById("startGame").classList.add("hidden");
+}
+
+// NEED TO DO: 
+// FLOWCHART
+// Disable key event listener between places (DONE)
+// Add Agra, Kuala Lumpur, Sydney, Mumbai, Singapore, 
+// Barcelona, Paris, Lyon, Portugal, Copnehagen, Kuwait, 
+// Thiruvananthapuram, Kyoto, London, Oslo, Belgium, 
+// Stockholm
+// Add images for all these
+// Credits for images
+// Style guesses remaining and guessed letters boxes
+// Show game when clicked on startGame
+// Hide Start Button once game has started
+// Graceful/Gradual opening of game div. 
+// Fix shake animation on wrong guess
+// Clean up log statements
 
 // keep counter of correct guesses entered, which increases every time a correct letter is guessed. 
 // when this equals the number of letters in the word (ignoring space), then user wins. 
 // Runs on the assumption that place names only have 1 space. Would have to modify code with regular 
 // expressions for places with multiple spaces.
 
-var choices = ["New York", "San Francisco", "Dubai"];
-var wpChoices = ["newyork", "sanfrancisco", "dubai"];
+/* GLOBAL VARIABLES */
+var choices = ["Abu Dhabi", "Athens", "Bangkok", "Dubai", "Giza", "Hong Kong",
+    "Istanbul", "Jerusalem", "Los Angeles", "Monteriggioni", "New York",
+    "Rome", "San Francisco", "Shanghai", "Tokyo"];
+var wpChoices = ["ad", "at", "bk", "db", "gz", "hk", "is", "js", "la", "mg", "ny", "rm", "sf", "sh", "tk"];
 var randomPos = 0;
 var randomWord = "";
 var randomWP = "";
@@ -26,8 +42,9 @@ var guessedLetters = "";
 var guessWord = "";
 var wrongGuess = false;
 var indexOfSpace = 0;
+var winCounter = 0;
 
-
+/* REPLACE CHAR IN STRING FUNCTION */
 var replaceAt = function (str, index, char) {
     // substr returns the characters in a string beginning at the
     // specified location through the specificed number of characters
@@ -42,10 +59,12 @@ var replaceAt = function (str, index, char) {
     return str.substr(0, index) + char + str.substr(index + 1);
 }
 
+/* CHECK IF USER INPUT IS AN ALPHABET */
 var isAlpha = function (str) {
     return /^[a-zA-Z]$/.test(str);
 }
 
+/* RESET BOARD TO DEFAULT STATE */
 var resetBoard = function () {
     randomPos = Math.floor(Math.random() * choices.length);
     randomWord = choices[randomPos];
@@ -86,16 +105,21 @@ var resetBoard = function () {
     document.getElementById("guessWord").innerText = guessWord;
     document.getElementById("actualWord").innerText = randomWord;
     document.getElementById("guessWord").innerText = guessWord;
+    document.getElementById("guessRem").style.color = "#000a17";
+    document.getElementById("guessRem").innerText = remainingGuesses;
     document.getElementById("lettersGuessed").innerText = guessedLetters;
-}
-
-window.onload = function () {
-    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
-    resetBoard();
 
     document.addEventListener("keyup", playTheGame);
 }
 
+window.onload = function () {
+    // var element = document.getElementById("theGame");
+    // element.classList.add("hidden");
+
+    resetBoard();
+}
+
+/* ACTUAL GAME LOGIC */
 var playTheGame = function (event) {
     var userLetter = event.key;
     if (isAlpha(userLetter)) {
@@ -133,6 +157,10 @@ var playTheGame = function (event) {
         if (guessWord === prevGuessWord) {
             if (guessedLetters.indexOf(userLetter) === -1) {
                 remainingGuesses--;
+
+                if(remainingGuesses < 4) {
+                    document.getElementById("guessRem").style.color = "red";
+                }
             }
             document.getElementById("guessedLetters").classList.add("shakeIt");
             document.getElementById("guessRem").innerText = remainingGuesses;
@@ -148,10 +176,16 @@ var playTheGame = function (event) {
         document.getElementById("guessWord").innerText = guessWord;
     }
 
+    /* WON GAME */
     if (correctGuesses === guessesCounter) {
+        document.removeEventListener("keyup", playTheGame);
         document.getElementById("bgimage").classList.add("sharp");
-
         window.setTimeout(resetBoard, 3000);
+        winCounter++;
+        document.getElementById("winCounter").innerText = winCounter;
     }
+
+    /* LOST GAME */
+
 }
 

@@ -41,7 +41,7 @@ h3 {
     z-index: 1;
 
     display: block;
-    background-image: url("../images/monteriggioni.jpg");
+    /* background-image: url("../images/monteriggioni.jpg"); */
     width: 1920px;
     height: 1080px;
 }
@@ -126,17 +126,16 @@ button:hover {
 }
 
 #guessWord {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: 600;
     color: blue;
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 20px;
-
 }
 
 #actualWord {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: 600;
     color: red;
     padding: 10px;
@@ -145,8 +144,9 @@ button:hover {
 }
 
 .hidden {
-    opacity: 0;
-    transition: opacity 0.5s linear;
+    /* opacity: 0;
+    transition: opacity 0.5s linear; */
+    display: none;
 }
 
 /* CREDITS TO LOUIS LAZARIS https://www.impressivewebs.com/animate-display-block-none/ */
@@ -155,11 +155,24 @@ button:hover {
     transition: opacity 0.5s linear;
 }
 
-#guessesRemaining, #guessRem, #guessedLetters, #lettersGuessed {
+#guessesRemaining, #guessRem, #guessedLetters, #lettersGuessed, #straightWins, #winCounter {
     font-size: 22px;
     font-weight: 600;
+    color: #fff;
     padding: 10px;
     text-transform: uppercase;
+    text-shadow: 2px 2px 10px #888;    
+}
+
+#guessesRemaining, #guessedLetters, #straightWins {
+    background-color: #8fc866;
+    border-top: 1px dotted #000;
+    border-bottom: 1px dotted #000;
+    border-radius: 10px;
+}
+
+#guessRem, #lettersGuessed, #winCounter {
+    color: #000a17
 }
 
 #lettersGuessed {
@@ -191,6 +204,9 @@ button:hover {
 	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+.red {
+    color: red;
+}
 
 
   

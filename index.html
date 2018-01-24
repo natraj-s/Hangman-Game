@@ -28,17 +28,18 @@
                         <hr class="title-header-hr" />
                         <p class="startGame">
                             <h3>
-                                <!-- <button id="startGame" onclick="showGame()">Start Game</button> -->
-                                <button id="startGame">Start Game</button>
+                                <button id="startGame" onclick="showGame()">Start Game</button>
+                                <!-- <button id="startGame">Start Game</button> -->
                             </h3>
                         </p>
                         <br />
-                        <p id="theGame">
+                        <div id="theGame">
                             <p id="guessWord"></p>
                             <p id="actualWord"></p>
                             <p id="guessesRemaining">GUESSES REMAINING: <span id="guessRem">7</span></p>
                             <p id="guessedLetters">GUESSED LETTERS: <span id="lettersGuessed"></span></p> 
-                        </p>
+                            <p id="straightWins">NUMBER OF STRAIGHT WINS: <span id="winCounter"></span></p> 
+                        </div>
                     </article>
                 </div>
             </section>
