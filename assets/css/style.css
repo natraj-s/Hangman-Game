@@ -1,0 +1,159 @@
+html {
+    /* Positioning */
+    position: relative;
+
+    /* Box-model */
+    min-height: 100%;
+}
+
+body {
+    /* Positioning */
+    margin-bottom: 150px;
+  
+    /* Typography */
+    font-family: 'Saira Condensed', sans-serif;
+}
+
+h1 {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 42px;
+}
+
+/* MAIN WRAPPER DIV */
+.wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* BACKGROUND IMAGE DIV */
+#bgimage {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    display: block;
+    background-image: url("../images/monteriggioni.jpg");
+    width: 1920px;
+    height: 1080px;
+
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+#bgimage:hover {
+    transition: .8s all;
+    -webkit-filter: blur(0);
+    -moz-filter: blur(0);
+    -o-filter: blur(0);
+    -ms-filter: blur(0);
+    filter: blur(0);
+}
+
+/* TITLE DIV */
+.title-header {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 72px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 10px;
+    margin-bottom:40px;
+}
+  
+/* MAIN CONTENT DIV */
+.content {
+    width: 100%;
+    padding: 30px;
+    margin-top: 32px;
+    background-color: #fff;
+    opacity: 0.9;
+    text-align: center;
+    border-radius: 10px;
+}
+  
+.content > p {
+    padding-top: 20px;
+    font-size: 16px;
+    line-height: 30px;
+    color: rgb(102, 102, 134);
+}
+
+/*
+  https://developer.mozilla.org/en/docs/Web/CSS/box-shadow
+  box-shadow: [inset?] [top] [left] [blur] [size] [color];
+  CREDITS TO: IAMSAIJO https://codemyui.com/simple-box-shadow-button-hover-animation/
+*/
+button {
+    background: none;
+    font: inherit;
+    text-transform: uppercase;
+    border: none;
+    line-height: 1;
+    margin: 0.2em;
+    padding: 0.5em 1em;
+    background-color: #8fc866;
+    transition: 0.5s;
+    border-radius: 10px;
+    box-shadow: 5px 7px 10px #ddd;
+}
+
+button:hover { 
+    background-color: #66c887;
+    color: #fff;
+    box-shadow: 2px 7px 10px #888;
+}
+
+#theGame {
+    font-size: 13px;
+    padding: 15px;
+    background-color: #ddd;
+    border: 1px dotted #8fc866;
+    border-radius: 10px;
+    transition: opacity 0.5s linear;
+}
+
+#guessWord {
+    font-size: 22px;
+    font-weight: 600;
+    color: blue;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+
+}
+
+#actualWord {
+    font-size: 22px;
+    font-weight: 600;
+    color: red;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+}
+
+.hidden {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+/* CREDITS TO LOUIS LAZARIS https://www.impressivewebs.com/animate-display-block-none/ */
+.show {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+
+
+  
+  
