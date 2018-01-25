@@ -15,12 +15,6 @@ var showGame = function () {
 // Stockholm
 // Add images for all these
 // Credits for images
-// Style guesses remaining and guessed letters boxes
-// Show game when clicked on startGame
-// Hide Start Button once game has started
-// Graceful/Gradual opening of game div. 
-// Fix shake animation on wrong guess
-// Clean up log statements
 
 // keep counter of correct guesses entered, which increases every time a correct letter is guessed. 
 // when this equals the number of letters in the word (ignoring space), then user wins. 
@@ -28,10 +22,13 @@ var showGame = function () {
 // expressions for places with multiple spaces.
 
 /* GLOBAL VARIABLES */
-var choices = ["Abu Dhabi", "Athens", "Bangkok", "Dubai", "Giza", "Hong Kong",
-    "Istanbul", "Jerusalem", "Los Angeles", "Monteriggioni", "New York",
-    "Rome", "San Francisco", "Shanghai", "Tokyo"];
-var wpChoices = ["ad", "at", "bk", "db", "gz", "hk", "is", "js", "la", "mg", "ny", "rm", "sf", "sh", "tk"];
+var choices = ["Abu Dhabi", "Agra", "Athens", "Barcelona", "Belgium", "Bangkok", "Chicago", "Dubai", "Giza", "Hong Kong",
+    "Istanbul", "Jerusalem", "Kuala Lumpur", "Kuwait", "Kyoto", "Los Angeles", "London", "Lisbon", "Lyon", 
+    "Mumbai", "Monteriggioni", "New York", "Oslo", "Paris", "Rome", "San Francisco", "Shanghai", "Singapore", "Stockholm", 
+    "Sydney", "Tokyo"];
+var wpChoices = ["ad", "ag", "at", "bc", "bg", "bk", "ch", "db", "gz", "hk", 
+    "is", "js", "kl", "ku", "ky", "la", "ld", "li", "ly", 
+    "mm", "mg", "ny", "os", "pa", "rm", "sf", "sh", "sp", "st", "sy", "tk"];
 var randomPos = 0;
 var randomWord = "";
 var randomWP = "";
@@ -77,6 +74,9 @@ var resetBoard = function () {
     wrongGuess = false;
     indexOfSpace = randomWord.indexOf(" ");
 
+    // If space exists, we're only looking for the (string.length -1) 
+    // number of correct guesses, as the user won't be trying to guess
+    // the space.
     if (indexOfSpace != -1) {
         guessesCounter = randomWord.length - 1;
     }
@@ -102,67 +102,67 @@ var resetBoard = function () {
     document.getElementById("bgimage").style.backgroundImage = "url(assets/images/" + randomWP + ".jpg)";
     document.getElementById("bgimage").classList.remove("sharp");
     document.getElementById("bgimage").classList.add("blurred");
+    document.getElementById("wrongGuess").classList.add("hidden");
     document.getElementById("guessWord").innerText = guessWord;
-    document.getElementById("actualWord").innerText = randomWord;
+    // document.getElementById("actualWord").innerText = randomWord;
+    document.getElementById("guessWord").style.color = "#66c887";
     document.getElementById("guessWord").innerText = guessWord;
     document.getElementById("guessRem").style.color = "#000a17";
     document.getElementById("guessRem").innerText = remainingGuesses;
     document.getElementById("lettersGuessed").innerText = guessedLetters;
+    document.getElementById("winCounter").innerText = winCounter;
 
     document.addEventListener("keyup", playTheGame);
 }
 
 window.onload = function () {
-    // var element = document.getElementById("theGame");
-    // element.classList.add("hidden");
-
+    var element = document.getElementById("theGame");
+    element.classList.add("hidden");
     resetBoard();
 }
 
 /* ACTUAL GAME LOGIC */
 var playTheGame = function (event) {
+
     var userLetter = event.key;
     if (isAlpha(userLetter)) {
-        if (wrongGuess === true) {
-            console.log("came here");
-            document.getElementById("guessedLetters").classList.remove("shakeIt");
-            wrongGuess = false;
-        }
-
         var prevGuessWord = guessWord;
         userLetter = userLetter.toLowerCase();
-        console.log("User letter is: " + userLetter);
+        // console.log("User letter is: " + userLetter);
 
         for (var i = 0; i < randomWord.length; i++) {
             if (randomWord.charAt(i) !== " ") {
                 if (randomWord.charAt(i).toLowerCase() === userLetter.toLowerCase()) {
-                    console.log("index: ", i);
-                    console.log("guessWord at i = " + i + " = " + guessWord.charAt(i).toLowerCase());
-                    console.log("randomWord at i = " + i + " = " + randomWord.charAt(i).toLowerCase());
+                    // console.log("index: ", i);
+                    // console.log("guessWord at i = " + i + " = " + guessWord.charAt(i).toLowerCase());
+                    // console.log("randomWord at i = " + i + " = " + randomWord.charAt(i).toLowerCase());
 
                     guessWord = replaceAt(guessWord, i, userLetter);
                     if (guessedLetters.indexOf(userLetter) === -1) {
                         correctGuesses++;
                     }
-                    console.log("guessword: " + guessWord);
+                    // console.log("guessword: " + guessWord);
                 }
             }
-            console.log("i status: ", i);
         }
 
-        console.log("prevguessword: " + prevGuessWord);
-        console.log("guessword: " + guessWord);
+        // console.log("prevguessword: " + prevGuessWord);
+        // console.log("guessword: " + guessWord);
 
         // If wrong letter guessed
         if (guessWord === prevGuessWord) {
             if (guessedLetters.indexOf(userLetter) === -1) {
                 remainingGuesses--;
 
-                if(remainingGuesses < 4) {
+                if (remainingGuesses < 4) {
                     document.getElementById("guessRem").style.color = "red";
                 }
+
+                document.getElementById("guessedLetters").classList.add("shakeIt");
+                setTimeout(function() {
+                    document.getElementById("guessedLetters").classList.remove("shakeIt");
+                }, 1000);
             }
-            document.getElementById("guessedLetters").classList.add("shakeIt");
             document.getElementById("guessRem").innerText = remainingGuesses;
             wrongGuess = true;
         }
@@ -171,8 +171,8 @@ var playTheGame = function (event) {
             guessedLetters += userLetter;
             document.getElementById("lettersGuessed").innerText = guessedLetters;
         }
-        console.log("guessword: " + guessWord);
-        console.log("correctGuesses: " + correctGuesses);
+        // console.log("guessword: " + guessWord);
+        // console.log("correctGuesses: " + correctGuesses);
         document.getElementById("guessWord").innerText = guessWord;
     }
 
@@ -180,12 +180,21 @@ var playTheGame = function (event) {
     if (correctGuesses === guessesCounter) {
         document.removeEventListener("keyup", playTheGame);
         document.getElementById("bgimage").classList.add("sharp");
-        window.setTimeout(resetBoard, 3000);
         winCounter++;
-        document.getElementById("winCounter").innerText = winCounter;
+        window.setTimeout(resetBoard, 4000);
     }
 
-    /* LOST GAME */
+    // console.log("remainingGuesses: " + remainingGuesses);
 
+    /* LOST GAME */
+    if (remainingGuesses === 0) {
+        document.removeEventListener("keyup", playTheGame);
+        document.getElementById("wrongGuess").classList.remove("hidden");
+        document.getElementById("bgimage").classList.add("sharp");
+        document.getElementById("guessWord").style.color = "red";
+        document.getElementById("guessWord").innerText = randomWord;
+        winCounter = 0;
+        window.setTimeout(resetBoard, 4000);
+    }
 }
 

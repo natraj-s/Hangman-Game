@@ -47,11 +47,11 @@ h3 {
 }
 
 .blurred {
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: blur(10px);
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(7px);
+    -o-filter: blur(7px);
+    -ms-filter: blur(7px);
+    filter: blur(7px);
 }
 
 .sharp {
@@ -79,7 +79,7 @@ h3 {
     padding: 30px;
     margin-top: 32px;
     background-color: #fff;
-    opacity: 0.9;
+    opacity: 0.93;
     text-align: center;
     border-radius: 10px;
 }
@@ -116,6 +116,12 @@ button:hover {
     box-shadow: 2px 7px 10px #888;
 }
 
+.info, ul {
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    list-style-type: none;
+}
+
 #theGame {
     font-size: 13px;
     padding: 15px;
@@ -125,13 +131,30 @@ button:hover {
     transition: opacity 0.5s linear;
 }
 
+#credits {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    padding: 15px;
+    background-color: inherit;
+}
+
+#wrongGuess {
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px #fff;
+    padding: 10px;
+}
+
 #guessWord {
     font-size: 32px;
     font-weight: 600;
-    color: blue;
+    color: #66c887;
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 20px;
+    text-shadow: 2px 2px 10px #fff;
 }
 
 #actualWord {
