@@ -128,20 +128,20 @@ var playTheGame = function (event) {
     if (isAlpha(userLetter)) {
         var prevGuessWord = guessWord;
         userLetter = userLetter.toLowerCase();
-        console.log("User letter is: " + userLetter);
+        // console.log("User letter is: " + userLetter);
 
         for (var i = 0; i < randomWord.length; i++) {
             if (randomWord.charAt(i) !== " ") {
                 if (randomWord.charAt(i).toLowerCase() === userLetter.toLowerCase()) {
-                    console.log("index: ", i);
-                    console.log("guessWord at i = " + i + " = " + guessWord.charAt(i).toLowerCase());
-                    console.log("randomWord at i = " + i + " = " + randomWord.charAt(i).toLowerCase());
+                    // console.log("index: ", i);
+                    // console.log("guessWord at i = " + i + " = " + guessWord.charAt(i).toLowerCase());
+                    // console.log("randomWord at i = " + i + " = " + randomWord.charAt(i).toLowerCase());
 
                     guessWord = replaceAt(guessWord, i, userLetter);
                     if (guessedLetters.indexOf(userLetter) === -1) {
                         correctGuesses++;
                     }
-                    console.log("guessword: " + guessWord);
+                    // console.log("guessword: " + guessWord);
                 }
             }
         }
