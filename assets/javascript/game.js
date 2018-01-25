@@ -7,16 +7,6 @@ var showGame = function () {
     resetBoard();
 }
 
-// NEED TO DO: 
-// FLOWCHART
-// Disable key event listener between places (DONE)
-// Add Agra, Kuala Lumpur, Sydney, Mumbai, Singapore, 
-// Barcelona, Paris, Lyon, Portugal, Copnehagen, Kuwait, 
-// Thiruvananthapuram, Kyoto, London, Oslo, Belgium, 
-// Stockholm
-// Add images for all these
-// Credits for images
-
 // keep counter of correct guesses entered, which increases every time a correct letter is guessed. 
 // when this equals the number of letters in the word (ignoring space), then user wins. 
 // Runs on the assumption that place names only have 1 space. Would have to modify code with regular 
